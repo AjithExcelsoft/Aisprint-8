@@ -31,7 +31,7 @@ Complete record of what was built in Sprint #1, through Phase 4.
 | `4c7d8b3` | `feat(db): add users table with TDD schema tests (Phase 1)` | 1 |
 | `c9eca71` | `feat(auth): add password hashing and UserService (Phase 2)` | 2 |
 | `1a32d73` | `feat(auth): add register, login, and logout API routes (Phase 3)` | 3 |
-| `48cc501` | `feat(ui): add login, register, and MCQ placeholder pages (Phase 4)` | 4 |
+| `ba43542` | `feat(ui): add login, register, and MCQ placeholder pages (Phase 4)` | 4 |
 
 Branch: `feature/sprint1-auth-foundation` (pushed to `origin` through Phase 3).
 
