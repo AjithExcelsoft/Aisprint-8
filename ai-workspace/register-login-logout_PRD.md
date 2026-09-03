@@ -536,7 +536,7 @@ Run `npm test` → **password and user-service tests pass**.
 
 ---
 
-### Phase 3: API Routes - PLANNED
+### Phase 3: API Routes - COMPLETED
 
 **Objective**: Expose register, login, and logout endpoints, driven by failing route tests.
 
@@ -853,8 +853,8 @@ When working with this PRD:
 ## Current Status
 
 **Last Updated**: 2026-09-04
-**Current Phase**: Phase 2 complete — awaiting review before Phase 3
+**Current Phase**: Phase 3 complete — awaiting review before Phase 4
 **Status**: IN PROGRESS
-**Approvals**: Vitest + `@cloudflare/vitest-plugin` approved; Zod pending
-**Test Results**: `npm test` — 17/17 passing (5 schema, 5 password, 7 user-service)
-**Next Steps**: Phase 3 — API route tests (red) → register/login/logout handlers (green)
+**Approvals**: Vitest + `@cloudflare/vitest-plugin` approved; Zod pending (manual validation used)
+**Test Results**: `npm test` — 28/28 passing (5 schema, 5 password, 7 user-service, 11 API routes)
+**Next Steps**: Phase 4 — UI pages (manual checklist red) → register/login/mcq pages (green)
