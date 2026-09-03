@@ -488,7 +488,7 @@ Run `npm test` → **schema tests pass**.
 
 ---
 
-### Phase 2: Password Utilities and UserService - PLANNED
+### Phase 2: Password Utilities and UserService - COMPLETED
 
 **Objective**: Build the minimum data layer for register and login, driven by failing tests.
 
@@ -852,9 +852,9 @@ When working with this PRD:
 
 ## Current Status
 
-**Last Updated**: 2026-09-03
-**Current Phase**: Phase 1 complete — awaiting review before Phase 2
+**Last Updated**: 2026-09-04
+**Current Phase**: Phase 2 complete — awaiting review before Phase 3
 **Status**: IN PROGRESS
 **Approvals**: Vitest + `@cloudflare/vitest-plugin` approved; Zod pending
-**Test Results**: `npm test` — 5/5 schema tests passing
-**Next Steps**: Phase 2 — password + UserService tests (red) → implementation (green)
+**Test Results**: `npm test` — 17/17 passing (5 schema, 5 password, 7 user-service)
+**Next Steps**: Phase 3 — API route tests (red) → register/login/logout handlers (green)
