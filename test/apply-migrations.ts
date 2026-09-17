@@ -8,9 +8,12 @@ beforeAll(async () => {
 });
 
 beforeEach(async () => {
-	try {
-		await env.DB.prepare("DELETE FROM users").run();
-	} catch {
-		// Table may not exist before Phase 1 migration is added
+	// Delete in FK-safe order: attempts → choices → mcqs, then users
+	for (const table of ["attempts", "choices", "mcqs", "users"] as const) {
+		try {
+			await env.DB.prepare(`DELETE FROM ${table}`).run();
+		} catch {
+			// Table may not exist before its migration is added
+		}
 	}
 });
