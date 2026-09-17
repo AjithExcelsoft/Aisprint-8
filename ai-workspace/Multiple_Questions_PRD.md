@@ -1,5 +1,5 @@
 Date created: 2026-09-17
-Date last modified: 2026-09-17 (Phase 1 complete)
+Date last modified: 2026-09-17 (Phase 3 complete)
 
 # Multiple Questions (MCQ) - Technical PRD
 
@@ -540,19 +540,19 @@ Run `npm test` → **43/43 passed**.
 
 ---
 
-### Phase 2: McqService - PLANNED
+### Phase 2: McqService - COMPLETED
 
 **Objective**: Implement the MCQ service layer driven by failing tests.
 
-**TDD step — RED**:
+**TDD step — RED** (completed 2026-09-17):
 
-Create `src/lib/services/mcq-service.test.ts`:
+Created `src/lib/services/mcq-service.test.ts` covering:
 
 - `createMcq` inserts MCQ + 2 choices; returns with ids
 - `createMcq` allows up to 6 choices
 - `createMcq` rejects fewer than 2 or more than 6 choices
 - `createMcq` rejects zero or multiple correct choices
-- `listMcqs` returns created rows ordered by `updated_at` desc (or `created_at` desc — pick one and stick to it)
+- `listMcqs` returns rows ordered by `updated_at` DESC
 - `getMcqById` returns MCQ with choices ordered by `position`
 - `getMcqById` returns `null` for unknown id
 - `updateMcq` updates name/description/choices and refreshes `updated_at`
@@ -560,56 +560,62 @@ Create `src/lib/services/mcq-service.test.ts`:
 - `recordAttempt` stores attempt with correct `is_correct`
 - `recordAttempt` rejects choice that does not belong to the MCQ
 
-Run `npm test` → **fail**.
+Run `npm test -- src/lib/services/mcq-service.test.ts` → **fail** (module missing).
 
-**TDD step — GREEN**:
+**TDD step — GREEN** (completed 2026-09-17):
 
-1. Implement `src/lib/services/mcq-service.ts`
-2. Add shared validation helpers in `src/lib/validations/mcq.ts` if useful for both service and routes
+1. Implemented `src/lib/services/mcq-service.ts`
+2. Added `src/lib/validations/mcq.ts` (shared create/update validation + choice limits)
+
+Run `npm test` → **60/60 passed**.
 
 **Phase complete when**:
 
-- [ ] All `mcq-service` tests pass
-- [ ] Phase 1 schema tests still pass
+- [x] All `mcq-service` tests pass (17 tests)
+- [x] Phase 1 schema tests still pass
 
 **Deliverables**:
 - `src/lib/services/mcq-service.ts`
 - `src/lib/services/mcq-service.test.ts`
-- `src/lib/validations/mcq.ts` (optional but recommended)
+- `src/lib/validations/mcq.ts`
 
 ---
 
-### Phase 3: API Routes - PLANNED
+### Phase 3: API Routes - COMPLETED
 
 **Objective**: Expose list/get/create/update/delete and attempt endpoints.
 
-**TDD step — RED**:
+**TDD step — RED** (completed 2026-09-17):
 
-Add route tests under `src/app/api/mcq/`:
+Added route tests under `src/app/api/mcq/`:
 
 | File | Coverage |
 |------|----------|
-| `route.test.ts` | GET list, POST create (valid, validation errors) |
+| `route.test.ts` | GET list, POST create (valid, validation errors, invalid JSON) |
 | `[id]/route.test.ts` | GET one, PUT update, DELETE |
 | `[id]/attempts/route.test.ts` | POST attempt success / bad choice / missing MCQ |
 
-Run `npm test` → **fail**.
+Run `npm test -- src/app/api/mcq` → **fail** (route modules missing).
 
-**TDD step — GREEN**:
+**TDD step — GREEN** (completed 2026-09-17):
 
-Implement:
+Implemented:
 
 - `src/app/api/mcq/route.ts` — GET, POST
 - `src/app/api/mcq/[id]/route.ts` — GET, PUT, DELETE
 - `src/app/api/mcq/[id]/attempts/route.ts` — POST
+- Extended `src/lib/validations/mcq.ts` with `validateAttemptBody`
+
+Run `npm test` → **77/77 passed**.
 
 **Phase complete when**:
 
-- [ ] All MCQ route tests pass
-- [ ] Prior phases still green
+- [x] All MCQ route tests pass (17 route tests)
+- [x] Prior phases still green
 
 **Deliverables**:
 - API route handlers + Vitest route tests
+- `validateAttemptBody` helper
 
 ---
 
@@ -842,21 +848,22 @@ When working with this PRD:
 ## Current Status
 
 **Last Updated**: 2026-09-17  
-**Current Phase**: Phase 1 — Database Schema  
-**Status**: PHASE 1 COMPLETE — awaiting user verification before commit  
+**Current Phase**: Phase 3 — API Routes  
+**Status**: PHASE 3 COMPLETE — awaiting user verification before commit  
 **Branch**: `feature/sprint2-multiple-questions`  
 **Depends on**: Sprint #1 auth foundation (`register-login-logout_PRD.md`)  
 
-**Verification results (Phase 1)**:
+**Verification results (Phase 3)**:
 
 | Command | Result |
 |---------|--------|
-| `npm test` (RED, before migration) | 15 failed / 28 passed (expected) |
-| `npx wrangler d1 migrations apply quiz-maker-db --local` | `0002_create_mcq_tables.sql` applied |
-| `npm test` (GREEN) | **43/43 passed** (7 files) |
+| `npm test -- src/app/api/mcq` (RED) | 3 suites failed — route modules missing |
+| `npm test` (GREEN) | **77/77 passed** (11 files) |
+
+**Note**: Phase 2 service files are still uncommitted on this branch along with Phase 3.
 
 **Next Steps**:
 
-1. User verifies Phase 1, then commit on `feature/sprint2-multiple-questions`
-2. Begin Phase 2: `McqService` TDD (RED → GREEN)
-3. Proceed Phase 3 → 4 → 5 using TDD
+1. User verifies Phase 3 (and optionally commit Phase 2 + 3 together or separately)
+2. Begin Phase 4: UI pages (list/create/edit/preview/delete)
+3. Proceed Phase 5 verification
